@@ -175,3 +175,34 @@ void simulasiEtalase(TokoElektronik& toko) {
     
     cout << "====================================\n";
 }
+// Menu Utama (CLI)
+int main() {
+    TokoElektronik toko;
+    int opsi;
+
+    do {
+        cout << "\n=================================================";
+        // Read otomatis setiap kali menu dibuka
+        tampilkanGudang(); 
+        cout << "=================================================\n";
+        cout << "Menu Utama Toko Gibran Jaya:\n";
+        cout << "1. Tambah Barang ke Gudang (Create)\n";
+        cout << "2. Ubah Barang di Gudang (Update)\n";
+        cout << "3. Hapus Barang dari Gudang (Delete)\n";
+        cout << "4. Simulasi Etalase (Test Exception Handling)\n";
+        cout << "5. Keluar\n";
+        cout << "Pilih menu (1-5): ";
+        cin >> opsi;
+
+        switch (opsi) {
+            case 1: tambahBarang(); break;
+            case 2: ubahBarang(); break;
+            case 3: hapusBarang(); break;
+            case 4: simulasiEtalase(toko); break;
+            case 5: cout << "\nMenutup sistem. Sampai jumpa!\n"; break;
+            default: cout << "Opsi tidak valid, silakan coba lagi.\n";
+        }
+    } while (opsi != 5);
+
+    return 0;
+}
