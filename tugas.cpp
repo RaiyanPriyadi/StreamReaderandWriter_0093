@@ -22,5 +22,4 @@ public:
     }
 
     // Method Public dengan parameter size_t
-    string ambilBarang(size_t nomorRak) {
-        try {
+    string ambilBarang(size_t nomorRak) 
