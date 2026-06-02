@@ -36,3 +36,26 @@ public:
 };
 
 const string NAMA_FILE = "gudang.txt";
+// 3. Fitur Manajemen Gudang Berbasis File (File I/O & CRUD)
+
+// Fungsi Bantuan (Read): Menampilkan daftar dari file txt
+void tampilkanGudang() {
+    ifstream file(NAMA_FILE);
+    cout << "\n=== Daftar Barang di Gudang Gibran Jaya ===\n";
+    if (!file.is_open()) {
+        cout << "(File gudang.txt belum ada. Silakan tambahkan barang)\n";
+        return;
+    }
+    
+    string line;
+    int indeks = 1;
+    bool adaData = false;
+    while (getline(file, line)) {
+        cout << indeks++ << ". " << line << "\n";
+        adaData = true;
+    }
+    if (!adaData) {
+        cout << "(Gudang Kosong)\n";
+    }
+    file.close();
+}
