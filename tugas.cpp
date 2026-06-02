@@ -59,3 +59,19 @@ void tampilkanGudang() {
     }
     file.close();
 }
+
+// c
+void tambahBarang() {
+    ofstream file(NAMA_FILE, ios::app);
+    if (!file.is_open()) {
+        cout << "Gagal membuka file gudang!\n";
+        return;
+    }
+    cout << "Masukkan nama barang baru: ";
+    string nama;
+    cin.ignore();
+    getline(cin, nama);
+    file << nama << "\n";
+    cout << "Berhasil menambahkan barang ke gudang!\n";
+    file.close();
+}
