@@ -60,7 +60,7 @@ void tampilkanGudang() {
     file.close();
 }
 
-// c
+// fungsi create
 void tambahBarang() {
     ofstream file(NAMA_FILE, ios::app);
     if (!file.is_open()) {
@@ -75,3 +75,90 @@ void tambahBarang() {
     cout << "Berhasil menambahkan barang ke gudang!\n";
     file.close();
 }
+
+// Fungsi Update
+void ubahBarang() {
+    ifstream fileIn(NAMA_FILE);
+    vector<string> daftarBarang;
+    string line;
+    
+    while (getline(fileIn, line)) {
+        daftarBarang.push_back(line);
+    }
+    fileIn.close();
+
+    if (daftarBarang.empty()) {
+        cout << "Tidak ada barang yang bisa diubah!\n";
+        return;
+    }
+
+    cout << "Masukkan nomor urut barang yang ingin diubah: ";
+    int pilihan;
+    cin >> pilihan;
+
+    if (pilihan < 1 || pilihan > daftarBarang.size()) {
+        cout << "Nomor barang tidak valid!\n";
+        return;
+    }
+
+    cout << "Masukkan nama barang yang baru: ";
+    cin.ignore();
+    string namaBaru;
+    getline(cin, namaBaru);
+    
+    daftarBarang[pilihan - 1] = namaBaru;
+
+    ofstream fileOut(NAMA_FILE);
+    for (const auto& barang : daftarBarang) {
+        fileOut << barang << "\n";
+    }
+    fileOut.close();
+    cout << "Data barang berhasil diperbarui!\n";
+}
+
+// Fungsi Delete
+void hapusBarang() {
+    ifstream fileIn(NAMA_FILE);
+    vector<string> daftarBarang;
+    string line;
+    
+    while (getline(fileIn, line)) {
+        daftarBarang.push_back(line);
+    }
+    fileIn.close();
+
+    if (daftarBarang.empty()) {
+        cout << "Tidak ada barang yang bisa dihapus!\n";
+        return;
+    }
+
+    cout << "Masukkan nomor urut barang yang ingin dihapus: ";
+    int pilihan;
+    cin >> pilihan;
+
+    if (pilihan < 1 || pilihan > daftarBarang.size()) {
+        cout << "Nomor barang tidak valid!\n";
+        return;
+    }
+
+    daftarBarang.erase(daftarBarang.begin() + pilihan - 1);
+
+    ofstream fileOut(NAMA_FILE);
+    for (const auto& barang : daftarBarang) {
+        fileOut << barang << "\n";
+    }
+    fileOut.close();
+    cout << "Barang berhasil dihapus dari gudang!\n";
+}
+// 4. Simulasi Etalase (Exception Handling)
+void simulasiEtalase(TokoElektronik& toko) {
+    cout << "\n=== Menjalankan Simulasi Etalase ===\n";
+    
+    // Skenario 1 (Sukses)
+    cout << "\n[Skenario 1] Pengambilan barang di rak indeks ke-1...\n";
+    try {
+        string barang = toko.ambilBarang(1);
+        cout << "Status: SUKSES -> Mengambil " << barang << "\n";
+    } catch (const exception& e) {
+        cout << e.what() << "\n";
+    }
