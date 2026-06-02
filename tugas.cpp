@@ -162,3 +162,16 @@ void simulasiEtalase(TokoElektronik& toko) {
     } catch (const exception& e) {
         cout << e.what() << "\n";
     }
+
+    // Skenario 2 (Gagal)
+    cout << "\n[Skenario 2] Pengambilan barang di rak indeks ke-5...\n";
+    try {
+        string barang = toko.ambilBarang(5);
+        cout << "Status: SUKSES -> Mengambil " << barang << "\n";
+    } catch (const runtime_error& e) {
+        // Menangkap error kustom yang dilempar oleh method ambilBarang
+        cout << e.what() << "\n";
+    }
+    
+    cout << "====================================\n";
+}
